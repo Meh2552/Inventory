@@ -139,7 +139,6 @@
             // 
             cbCategory.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cbCategory.FormattingEnabled = true;
-            cbCategory.Items.AddRange(new object[] { "Male", "Female", "Other" });
             cbCategory.Location = new Point(146, 177);
             cbCategory.Name = "cbCategory";
             cbCategory.Size = new Size(268, 25);

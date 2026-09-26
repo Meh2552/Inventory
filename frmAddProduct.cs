@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace Inventory
 {
-    public partial class frmAddProduct: Form
+    public partial class frmAddProduct : Form
     {
         private string _ProductName;
         private string _Category;
@@ -17,22 +17,22 @@ namespace Inventory
         public string Product_Name(string name)
         {
             if (!Regex.IsMatch(name, @"^[a-zA-Z]+$"))
-                return name;
-            else throw new StringFormatException("Invalid string format. Please enter a valid string.");
+                throw new StringFormatException("Product name cannot be empty. Please enter a valid string.");
+            else return name;
         }
 
         public int Quantity(string qty)
         {
-            if (!Regex.IsMatch(qty, @"^[0-9]"))
-                return Convert.ToInt32(qty);
-            else throw new NumberFormatException("Invalid number format. Please enter a valid integer.");
+            if (!Regex.IsMatch(qty, @"^[0-9]+$"))
+                throw new StringFormatException("Quantity cannot be empty. Please enter a valid integer. ");
+            else return Convert.ToInt32(qty);
         }
 
         public double SellingPrice(string price)
         {
             if (!Regex.IsMatch(price.ToString(), @"^(\d*\.)?\d+$"))
-                return Convert.ToDouble(price);
-            else throw new CurrencyFormatException("Invalid currency format. Please enter a valid number.");
+                throw new StringFormatException("Selling price cannot be empty. Please enter a valid number.");
+            else return Convert.ToDouble(price);
         }
 
         class NumberFormatException : Exception
@@ -51,6 +51,11 @@ namespace Inventory
         {
             public StringFormatException(string message) : base(message) {
             }
+        }
+
+        public frmAddProduct()
+        {
+            InitializeComponent();
         }
 
         private void frmAddProduct_Load(object sender, EventArgs e)
@@ -100,6 +105,8 @@ namespace Inventory
                 _ExpDate, _SellPrice, _Quantity, _Description));
                 gridViewProductList.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 gridViewProductList.DataSource = showProductList;
+
+                valid = true;
             }
 
 
